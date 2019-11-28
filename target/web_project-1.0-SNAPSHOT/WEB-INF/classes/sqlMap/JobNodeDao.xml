@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mnkj.dao.JobNodeDao">
+
+    <resultMap id="BaseResultMap" type="com.mnkj.entity.JobNode">
+        <id property="id" column="id"/>
+        <id property="jobId" column="jobId"/>
+        <result property="jobNodename" column="jobNodename"/>
+        <result property="nodeDescribe" column="nodeDescribe"/>
+        <result column="creator" property="creator"/>
+        <result column="createTime" property="createTime"/>
+        <result column="lastModifier" property="lastModifier"/>
+        <result column="lastModifyTime" property="lastModifyTime"/>
+        <result column="isDeleted" property="isDeleted"/>
+        <result column="version" property="version"/>
+    </resultMap>
+    <insert id="addJobNodes" parameterType="com.mnkj.entity.JobNode">
+      insert into jobnode(
+         id,
+         jobId,
+         jobNodename,
+         nodeDescribe,
+         creator,
+         createTime,
+         lastModifier,
+         lastModifyTime,
+         isDeleted,
+         version
+      )values (
+         null,
+         #{jobId},
+         #{jobNodename},
+         #{nodeDescribe},
+         #{creator},
+         #{createTime},
+         #{lastModifier},
+         #{lastModifyTime},
+         #{isDeleted},
+         #{version}
+         )
+    </insert>
+    <update id="updateJobNode" parameterType="com.mnkj.entity.JobNode">
+        update jobnode set
+        jobId = #{jobId},
+        jobNodename = #{jobNodename},
+        nodeDescribe = #{nodeDescribe},
+        creator = #{creator},
+        createTime = #{createTime},
+        lastModifier = #{lastModifier},
+        lastModifyTime = #{lastModifyTime},
+        isDeleted = #{isDeleted},
+        version = #{version}
+        where id = #{id}
+    </update>
+    <select id="selectNodeById" resultMap="BaseResultMap" parameterType="long">
+        select * from jobnode where jobId = #{id}
+    </select>
+    <delete id="delNodes" parameterType="Long">
+        delete  from jobnode where jobId = #{id}
+    </delete>
+</mapper>

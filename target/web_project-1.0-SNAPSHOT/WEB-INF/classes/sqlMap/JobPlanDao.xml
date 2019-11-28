@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mnkj.dao.JobPlanDao">
+
+   <resultMap id="BaseResultMap" type="com.mnkj.entity.JobPlan">
+       <id property="id" column="id"/>
+       <result column="jobTitle" property="jobTitle"/>
+       <result column="customerName" property="customerName"/>
+       <result column="contactInformation" property="contactInformation"/>
+       <result column="speed" property="speed"/>
+       <result column="jobDescribe" property="jobDescribe"/>
+       <result column="creator" property="creator"/>
+       <result column="operator" property="operator"/>
+       <result column="createTime" property="createTime"/>
+       <result column="lastModifier" property="lastModifier"/>
+       <result column="lastModifyTime" property="lastModifyTime"/>
+       <result column="isDeleted" property="isDeleted"/>
+       <result column="version" property="version"/>
+   </resultMap>
+    <insert id="addJobPlan" parameterType="com.mnkj.entity.JobPlan">
+      insert into jobplan(
+         id,
+         jobTitle,
+         customerName,
+         contactInformation,
+         operator,
+         speed,
+         jobDescribe,
+         creator,
+         createTime,
+         lastModifier,
+         lastModifyTime,
+         isDeleted,
+         version
+      )values (
+         null,
+         #{jobTitle},
+         #{customerName},
+         #{contactInformation},
+         #{operator},
+         #{speed},
+         #{jobDescribe},
+         #{creator},
+         #{createTime},
+         #{lastModifier},
+         #{lastModifyTime},
+         #{isDeleted},
+         #{version}
+         )
+    </insert>
+    <update id="updateJobPlan" parameterType="com.mnkj.entity.JobPlan">
+        update jobplan set
+        jobTitle = #{jobTitle},
+        customerName = #{customerName},
+        contactInformation = #{contactInformation},
+        speed = #{speed},
+        jobDescribe = #{jobDescribe},
+        creator = #{creator},
+        createTime = #{createTime},
+        lastModifier = #{lastModifier},
+        lastModifyTime = #{lastModifyTime},
+        isDeleted = #{isDeleted},
+        version = #{version}
+        where id = #{id}
+    </update>
+    <select id="selectPlanById" resultMap="BaseResultMap" parameterType="long">
+        select * from jobplan where id = #{id}
+    </select>
+    <select id="selectPlanAll" resultMap="BaseResultMap">
+        select id,jobTitle,operator,createTime,speed,lastModifyTime from jobplan
+        <where>
+            <if test="jobTitle != null and jobTitle != ''">
+                jobTitle like CONCAT('%', #{jobTitle}, '%')
+            </if>
+        </where>
+        order by createTime desc
+    </select>
+    <delete id="delPlan" parameterType="Long">
+        delete  from jobplan where id = #{id}
+    </delete>
+</mapper>

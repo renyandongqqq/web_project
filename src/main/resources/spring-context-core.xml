@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}"
+          p:initialSize="${jdbc.initialSize}"
+          p:minIdle="${jdbc.minIdle}"
+          p:maxActive="${jdbc.maxActive}"
+          p:maxWait="60000"
+          p:timeBetweenEvictionRunsMillis="60000"
+          p:minEvictableIdleTimeMillis="300000"
+          p:validationQuery="${jdbc.testSql}"
+          p:testWhileIdle="true"
+          p:testOnBorrow="false"
+          p:testOnReturn="false"
+          p:filters="${jdbc.filters}" />
+
+    <bean id="nativeJdbcExtractor" class="com.alibaba.druid.support.spring.DruidNativeJdbcExtractor" />
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:sqlmap-config.xml"
+          p:mapperLocations="classpath*:/sqlMap/**/*.xml" />
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.mnkj.**.dao"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory" />
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource" p:defaultTimeout="3" />
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" order="200" mode="proxy" />
+
+</beans>
