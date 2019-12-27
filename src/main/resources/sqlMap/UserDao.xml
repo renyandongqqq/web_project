@@ -4,8 +4,10 @@
 
     <resultMap id="BaseResultMap" type="com.mnkj.entity.User">
         <id column="id" property="id" />
+        <id column="roleId" property="roleId" />
         <result column="username" property="username" />
         <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
     </resultMap>
 
     <!-- 根据用户名查找用户 -->
@@ -13,5 +15,39 @@
 		select * from user where username=#{username}
 	</select>
 
+    <select id="findUserAll" resultMap="BaseResultMap">
+        select * from user
+    </select>
 
+    <select id="findUserById" parameterType="Long" resultType="com.mnkj.entity.User">
+        select *  from user where id = #{id}
+    </select>
+    <insert id="saveUser" parameterType="com.mnkj.entity.User">
+        insert into user (
+          id,
+          username,
+          password,
+          nickname,
+          roleId
+        )
+        value(
+         null,
+         #{username},
+         #{password},
+         #{nickname},
+         #{roleId}
+        )
+    </insert>
+    <update id="editUser" parameterType="com.mnkj.entity.User">
+        update user set
+        username = #{username},
+        password = #{password},
+        nickname = #{nickname},
+        roleId = #{roleId}
+        where
+        id = #{id}
+    </update>
+    <delete id="delUser" parameterType="Long">
+        delete from user where id = #{id}
+    </delete>
 </mapper>

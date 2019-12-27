@@ -15,9 +15,11 @@
         <script type="text/javascript" src="${staticPath}/assets/layui/js/xadmin.js"></script>
     </head>
     <body>
+
+
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+            <span class="x-red">test</span>！当前时间:</blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -142,7 +144,8 @@
                     <tbody>
                         <tr>
                             <th>版权所有</th>
-                            <td>任燕东
+                            <td>呼和浩特市蒙能科技有限责任公司
+
                                 <a href="http://#/" class='x-a' target="_blank">访问官网</a></td>
                         </tr>
                         <tr>

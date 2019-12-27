@@ -51,12 +51,6 @@ public class ManageController {
 
 
 
-    @RequestMapping("admin/admin/member-list")
-    public String userInfo(){
-
-        return "admin/userInfo";
-    }
-
 
 
 

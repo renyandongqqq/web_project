@@ -2,8 +2,10 @@ package com.mnkj.entity;
 
 public class User {
     private Long id;
+    private Long roleId;
     private String username;
     private String password;
+    private String nickname;
 
     public Long getId() {
         return id;
@@ -23,6 +25,22 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void setPassword(String password) {

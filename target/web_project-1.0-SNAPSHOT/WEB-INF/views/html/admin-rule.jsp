@@ -16,17 +16,13 @@
   <script src="${staticPath}/assets/layui/lib/layui/layui.js" charset="utf-8"></script>
   <script type="text/javascript" src="${staticPath}/assets/layui/js/xadmin.js"></script>
 </head>
-  <script>
-
-
-  </script>
   <body>
     <div class="x-body">
           <xblock>
             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
             <button class="layui-btn" onclick="addRule()"><i class="layui-icon"></i>添加</button>
             <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-          <xblock>
+          </xblock>
       <table class="layui-table">
         <thead>
           <tr>
@@ -80,64 +76,61 @@
           </c:if>
         </div>
       </div>
-
-    <script>
-      //修改或编辑权限
-      addRule = function() {
-        //打开弹窗
-        layer.open({
-          type: 2,
-          title: "编辑权限",
-          skin: "myclass",//自定样式
-          area: ["480px", "460px"],
-          content: 'rule-add',
-            end: function () {
-                location.reload();
-            }
-        });
-      }
-
-      //修改或编辑权限
-      editRule = function(id) {
+      <script>
+        //修改或编辑权限
+        addRule = function() {
           //打开弹窗
           layer.open({
-              type: 2,
-              title: "编辑权限",
-              skin: "myclass",//自定样式
-              area: ["480px", "460px"],
-              content: 'rule-add?id='+id,
+            type: 2,
+            title: "编辑权限",
+            skin: "myclass",//自定样式
+            area: ["480px", "460px"],
+            content: 'rule-add',
               end: function () {
                   location.reload();
               }
           });
-      }
-
-      //删除权限
-      function delRule(id){
-        var result = confirm('确认要删除吗');
-        if (result == true) {
-          $.ajax({
-            url: '${basePath}/delRule?id=' + id,
-            type: 'post',
-            cache: false,
-            dataType:'json',
-            success: function(result) {
-
-              if (result.code != 0) {
-                alert(result.message);
-                return false;
-              }
-              layer.msg('已删除!',{icon:1,time:500});
-              location.reload();
-            }
-
-          });
         }
-      }
 
+        //修改或编辑权限
+        editRule = function(id) {
+            //打开弹窗
+            layer.open({
+                type: 2,
+                title: "编辑权限",
+                skin: "myclass",//自定样式
+                area: ["480px", "460px"],
+                content: 'rule-add?id='+id,
+                end: function () {
+                    location.reload();
+                }
+            });
+        }
 
+        //删除权限
+        function delRule(id){
+          var result = confirm('确认要删除吗');
+          if (result == true) {
+            $.ajax({
+              url: '${basePath}/delRule?id=' + id,
+              type: 'post',
+              cache: false,
+              dataType:'json',
+              success: function(result) {
 
-</script>
-</body>
+                if (result.code != 0) {
+                  alert(result.message);
+                  return false;
+                }
+                layer.msg('已删除!',{icon:1,time:500});
+                location.reload();
+              }
+
+            });
+          }
+        }
+      </script>
+    </div>
+  </body>
 
 </html>

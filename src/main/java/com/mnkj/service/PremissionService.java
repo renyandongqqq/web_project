@@ -5,6 +5,7 @@ import com.mnkj.entity.Permission;
 import java.util.List;
 
 public interface PremissionService {
+
     void addPer(Permission permission);
 
     List<Permission> selectPerAll();
@@ -13,5 +14,7 @@ public interface PremissionService {
 
     Permission findRuleById(Long id);
 
-    List<Permission> findRule(Long id);
+    List<Permission> findRuleByRoleId(Long id);
+
+    void delRoleAndRule(Long roleId, Long... resourcesIdArray);
 }

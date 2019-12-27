@@ -4,6 +4,7 @@ import com.mnkj.entity.Role;
 
 import java.util.List;
 
+
 public interface RoleService {
 
     void addRole(String roleName);
@@ -15,4 +16,6 @@ public interface RoleService {
     void delRole(Long id);
 
     void delRoleAndPer(Long id);
+
+    void editRoleAndRule(Long roleId, Long... resourcesIdArray);
 }

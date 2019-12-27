@@ -4,6 +4,7 @@ import com.mnkj.entity.Permission;
 import com.mnkj.entity.Role;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public interface PermissionDao {
@@ -20,5 +21,8 @@ public interface PermissionDao {
 
     void updateRule(Permission permissionDb);
 
-    List<Permission> findRule(Long id);
+    List<Permission> findRuleByRoleId(Long id);
+
+
+    void delRoleAndRule(HashMap<String, Object> params);
 }

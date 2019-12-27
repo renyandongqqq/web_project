@@ -93,17 +93,23 @@
                     title: "修改权限",
                     skin: "myclass",//自定样式
                     area: ["980px", "460px"],
-                    content: 'role-add?id='+id,
+                    content: 'role-rule?id='+id,
+                  end: function () {
+                    location.reload();
+                  }
                 });
             }
             //添加角色
-            addRole = function () {
+            addRoleName = function () {
                 layer.open({
                     type: 2,
-                    title: "添加权限",
+                    title: "添加角色名称",
                     skin: "myclass",//自定样式
-                    area: ["980px", "460px"],
+                    area: ["480px", "360px"],
                     content: 'role-add',
+                    end: function () {
+                    location.reload();
+                  }
                 });
             }
         });

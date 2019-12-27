@@ -6,9 +6,11 @@
     <id column="id" property="id" />
     <result column="roleName" property="roleName" />
 </resultMap>
+
     <select id="getUserRoleByUserId" parameterType="long" resultMap="BaseResuleMap">
       select * from role where id in(select roleId from user_role where roleId= #{id})
     </select>
+
     <insert id="addRole" parameterType="String">
         insert into role (
           id,
@@ -18,10 +20,28 @@
         #{roleName}
         )
     </insert>
+
     <select id="selectRoleAll" resultMap="BaseResuleMap">
         select * from role
     </select>
+
     <select id="findRoleById" resultMap="BaseResuleMap">
         select * from role,role_pre where role.id = role_pre.roleId and role.id = #{id}
     </select>
+
+    <insert id="editRoleAndRule" parameterType="map">
+        insert into role_pre (
+        id,
+        roleId,
+        preID
+        )
+        values
+        <foreach collection="resourcesIdArray" item="item" index="index" separator=",">
+            (null, #{roleId,jdbcType=BIGINT}, #{item,jdbcType=BIGINT})
+        </foreach>
+
+    </insert>
+    <delete id="delRole" parameterType="Long">
+        delete from role where id = #{id}
+    </delete>
 </mapper>

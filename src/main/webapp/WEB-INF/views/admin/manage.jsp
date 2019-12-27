@@ -87,7 +87,7 @@
                 </a>
             </li >
             <li>
-                <a _href="admin/member-list">
+                <a _href="admin/userInfo">
                     <i class="iconfont">&#xe6a7;</i>
                     <cite>系统用户管理</cite>
                 </a>

@@ -6,9 +6,11 @@
       <result column="url" property="url" />
       <result column="description" property="description" />
    </resultMap>
+
    <select id="getPermissionsByRoleId" parameterType="long" resultType="com.mnkj.entity.Permission">
       select * from permission where id in (select preId from role_pre where roleId = #{id})
    </select>
+
    <insert id="addPer" parameterType="com.mnkj.entity.Permission">
       insert into permission (
       id,
@@ -23,19 +25,30 @@
    <select id="selectPerAll" resultMap="BaseResuleMap">
       select * from permission
    </select>
+
    <delete id="delRule" parameterType="Long">
       delete  from permission where id = #{id}
    </delete>
    <select id="findRuleById" parameterType="Long" resultMap="BaseResuleMap">
       select * from permission where id = #{id}
    </select>
+
    <update id="updateRule" parameterType="com.mnkj.entity.Permission">
       update permission set
       url = #{url},
       description = #{description}
       where id = #{id}
    </update>
-   <select id="findRule" parameterType="Long" resultMap="BaseResuleMap">
+   <select id="findRuleByRoleId" parameterType="Long" resultMap="BaseResuleMap">
       select * from permission where id in(select preId from role_pre where roleId = #{id} )
    </select>
+
+   <delete id="delRoleAndRule" parameterType="map">
+      delete from role_pre
+    where roleId = #{roleId,jdbcType=BIGINT}
+    and preID in
+      <foreach collection="resourcesIdArray" item="item"  open="(" separator="," close=")">
+         #{item,jdbcType=BIGINT}
+      </foreach>
+   </delete>
 </mapper>

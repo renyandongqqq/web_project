@@ -35,19 +35,19 @@
                         <div class="uinArea" id="uinArea">
                             <label class="input-tips" for="username">帐号：</label>
                             <div class="inputOuter" id="uArea">
-
                                 <input type="text" id="username" name="username" class="inputstyle"/>
                             </div>
                         </div>
                         <div class="pwdArea" id="pwdArea">
                             <label class="input-tips" for="password">密码：</label>
                             <div class="inputOuter" id="pArea">
-
-                                <input type="password" id="password" name="password" class="inputstyle"/>
+                                <input type="password" id="password" autocomplete="on" name="password" class="inputstyle"/>
                             </div>
                         </div>
 
-                        <div style="padding-left:50px;margin-top:20px;"><input type="button"  onclick="loginCheck()" value="登 录"  style="width:150px;" class="button_blue"/></div>
+                        <div style="padding-left:50px;margin-top:20px;">
+                            <input type="button"  onclick="loginCheck()" value="登 录"  style="width:150px;" class="button_blue"/>
+                        </div>
                     </form>
                 </div>
 
@@ -121,7 +121,6 @@
             username:$("#username").val(),
             password:$("#password").val()
         }
-
         $.ajax({
           type:"POST",
           url:"${basePath}/admin/login",

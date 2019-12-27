@@ -16,47 +16,48 @@
   
   <body>
     <div class="x-body">
-        <form action="" method="post" class="layui-form layui-form-pane">
+        <form  class="layui-form layui-form-pane" id="formRole">
                 <div class="layui-form-item">
                     <label class="layui-form-label">
                         <span class="x-red">*</span>角色名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="hidden" name="id" id="id" value="${role.id}">
                         <input type="text" id="roleName" name="roleName" value="${role.roleName}"required lay-verify="required"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">
-                        拥有权限
-                    </label>
-                    <table  class="layui-table layui-input-block">
-                        <tbody>
-                            <tr>
-                                <td>
-                                     系统权限
-                                </td>
-                                <td>
-                                    <div class="layui-input-block">
-                                        <c:if test="${empty perList}" >
-                                            <input name="id[]" lay-skin="primary" type="checkbox" title="用户管理" value="">
-                                        </c:if>
-                                        <c:forEach items="${perList}" var="foo">
-                                            <input name="id[]" lay-skin="primary" type="checkbox" title="${foo.description}" value="${foo.id}">
-                                        </c:forEach>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="add">增加</button>
-              </div>
-            </form>
+                    <button class="layui-btn" id="addRole" >增加</button>
+                </div>
+        </form>
     </div>
     <script>
+        //添加角色名称
+        $("#addRole").on('click',function(){
+            var roleName = $("input[name='roleName']").val();
+            if (roleName == "" || roleName == null || roleName == undefined) {
+                alert("角色不能为空");
+                return false;
+                /*阻止表单提交*/
+            }
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "${basePath}/addRole" ,//url
+                data: $('#formRole').serialize(),
+                success: function (result) {
+                    if (result.code != 0) {
+                        alert(result.message);
+                        return false;
+                    }
+                }
+            });
+                 alert("成功！")
+               var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+               parent.layer.close(index); //再执行关闭
+        });
+
     </script>
   </body>
 
